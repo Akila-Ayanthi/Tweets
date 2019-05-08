@@ -12,9 +12,9 @@
                     {{csrf_field()}}
                     <input type="hidden" name="user" value="{{$user->id}}">
                         @if(Auth::user()->isFollowing($user))
-                            <input type="submit" name="Unfollow" value="unfollow" class="btn btn-danger float-right">
+                            <input type="submit" name="unfollow" value="Unfollow" class="btn btn-danger float-right">
                         @else
-                            <input type="submit" name="Follow" value="follow" class="btn btn-primary float-right">
+                            <input type="submit" name="follow" value="Follow" class="btn btn-primary float-right">
                         @endif
 
                     </form>
@@ -25,7 +25,7 @@
                             {{$message->body}}
                         </h5>
                         <small>
-                            {{$message->created_at}}
+                            {{$message->created_at->diffForHumans()}}
                         </small>
                         <hr>
                     
