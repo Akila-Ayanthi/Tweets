@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Input;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -51,6 +52,18 @@ class HomeController extends Controller
         $followers=Auth::user()->following->pluck('id');
         $messages=Message::whereIn('user_id',$followers)->orWhere('user_id',Auth::user()->id)->get();
         return view('home',['messages'=>$messages]);
+
+    }
+
+    public function searchUser(){
+       $searchedUser=Input::get('searchuser');
+       $nuser=User::where('name','LIKE','%'.$searchedUser.'%')->count();
+        if($nuser==1){
+            $user=User::where('name','LIKE','%'.$searchedUser.'%')->get();
+            dd($user);
+            
+        }
+     
 
     }
 }

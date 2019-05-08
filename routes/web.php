@@ -33,3 +33,5 @@ Route::get('/x',function(){
 Route::post('/follow','ProfileController@followOrUnfollow');
 
 Route::post('/postMessage','HomeController@postMessage');
+
+Route::post('/searchUser','HomeController@searchUser');

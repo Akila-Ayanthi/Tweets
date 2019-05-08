@@ -12,6 +12,7 @@ class ProfileController extends Controller
 {
     public function index($user){
        $user=User::findOrFail($user);
+       dd($user);
         $messages=Message::where('user_id',$user->id)->get();
         return view('profile',['user'=>$user,'messages'=>$messages]); 
     }
