@@ -23,7 +23,7 @@
                             {{$message->body}}
                         </h5>
                         <small>
-                            {{$message->created_at}}
+                            {{$message->created_at->diffForHumans()}}
                         </small>
                         <hr>
                     
@@ -38,8 +38,9 @@
                 </div>
                 <div class="card-body">
                         @foreach(Auth::user()->notifications as $notification)
-                            <h5>
-                                {{$notification->data['user_name']}} started following you
+                            <h5><a href="/u/{{$notification->data['user_id']}}">
+                                    {{$notification->data['user_name']}} started following you
+                                </a>
                             </h5>
                             <small>
                                 {{$notification->created_at->diffForHumans()}}
