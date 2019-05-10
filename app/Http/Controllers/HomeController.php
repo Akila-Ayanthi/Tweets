@@ -50,18 +50,21 @@ class HomeController extends Controller
         $messages->save();
 
         $followers=Auth::user()->following->pluck('id');
-        $messages=Message::whereIn('user_id',$followers)->orWhere('user_id',Auth::user()->id)->get();
+        $messages=Message::whereIn('user_id',$followers)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
         return view('home',['messages'=>$messages]);
 
     }
 
-    public function searchUser(){
+    public function searchUser(Request $request){
        $searchedUser=Input::get('searchuser');
-       $nuser=User::where('name','LIKE','%'.$searchedUser.'%')->count();
-        if($nuser==1){
-            $user=User::where('name','LIKE','%'.$searchedUser.'%')->get();
-            dd($user);
-            
+       $userList=User::where('name','LIKE','%'.$searchedUser.'%')->get();
+        if(count($userList)>0){
+            $user=$userList->first();
+            $messages=Message::where('user_id',$user->id)->get();
+        return view('profile',['user'=>$user,'messages'=>$messages]); 
+        }
+        else{
+
         }
      
 

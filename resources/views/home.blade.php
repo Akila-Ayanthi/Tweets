@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <form action="/postMessage" method="post">
                     {{csrf_field()}}
-                        <textarea name="post" id="post" rows="10" class="form-control" placeholder="What's on your mind?"></textarea>
+                        <textarea name="post" id="post" rows="5" class="form-control" placeholder="What's on your mind?"></textarea>
                         <input type="submit" value="Post" class="btn btn-primary">
                     </form>
                 </div>
